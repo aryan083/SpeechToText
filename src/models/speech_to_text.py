@@ -1,6 +1,5 @@
 import torch
 import librosa
-import tensorflow as tf
 from transformers import (
     AutoModelForSpeechSeq2Seq, 
     AutoProcessor, 
@@ -126,14 +125,14 @@ class FreeIndianSpeechToText:
         self.pipe = pipeline(
             "automatic-speech-recognition",
             model=self.model_id,
-            torch_dtype=self.torch_dtype,
+            dtype=self.torch_dtype,
             device=self.device,
             model_kwargs={"cache_dir": self.cache_dir, "use_safetensors": True},
             return_timestamps=True
         )
     
     def _load_wav2vec2_model(self) -> None:
-        """Load Wav2Vec2 models with TensorFlow compatibility."""
+        """Load Wav2Vec2 models."""
         self.model = Wav2Vec2ForCTC.from_pretrained(
             self.model_id, 
             cache_dir=self.cache_dir
@@ -142,14 +141,6 @@ class FreeIndianSpeechToText:
             self.model_id,
             cache_dir=self.cache_dir
         )
-        
-        # Enable TensorFlow optimization if available
-        if hasattr(self.model, 'to_tf'):
-            try:
-                self.model = self.model.to_tf()
-                self.logger.info("Converted model to TensorFlow for optimization")
-            except Exception as e:
-                self.logger.warning(f"TensorFlow conversion failed: {e}")
     
     def _load_pipeline_model(self) -> None:
         """Load pipeline-based models."""

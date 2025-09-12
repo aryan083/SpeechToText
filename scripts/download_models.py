@@ -114,7 +114,7 @@ class ModelDownloader:
             pipe = pipeline(
                 "automatic-speech-recognition",
                 model=model_id,
-                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+                dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
                 device="cpu",  # Use CPU for downloading to avoid GPU memory issues
                 model_kwargs={
                     "cache_dir": str(self.cache_dir),
