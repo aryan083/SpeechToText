@@ -1,8 +1,11 @@
 ---
-title: Indian Speech-to-Text Models
-emoji: 🎤
+title: Speech To Text
+emoji: 🎤  
 colorFrom: blue
-colorTo: purple
+colorTo: green
+sdk: docker
+app_port: 7860
+title: Indian Speech-to-Text Models
 sdk: docker
 app_port: 7860
 pinned: false
