@@ -47,4 +47,4 @@ ENV APP_ENV=prod \
 EXPOSE 7860
 
 # Use the Spaces-optimized app
-CMD ["python", "app_spaces.py"]
+CMD ["python", "app.py"]
