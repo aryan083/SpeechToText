@@ -1,3 +1,31 @@
+---
+title: Indian Speech-to-Text Models
+emoji: 🎤
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 7860
+pinned: false
+license: mit
+tags:
+  - speech-to-text
+  - indian-languages
+  - hindi
+  - tamil
+  - bengali
+  - whisper
+  - wav2vec2
+  - gradio
+  - transformers
+  - tensorflow
+models:
+  - distil-whisper/distil-large-v3
+  - openai/whisper-large-v3
+  - ai4bharat/indicwav2vec-hindi
+datasets:
+  - mozilla-foundation/common_voice_11_0
+---
+
 # 🎤 Complete Guide to Free Open-Source Speech-to-Text Models for Indian Languages
 
 A comprehensive web application showcasing free, open-source speech-to-text models optimized for Indian languages. Built with TensorFlow, Gradio, and Transformers.

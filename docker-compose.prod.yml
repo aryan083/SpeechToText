@@ -1,0 +1,26 @@
+# Production environment configuration
+version: '3.8'
+
+services:
+  speech-to-text:
+    environment:
+      - APP_ENV=prod
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - GRADIO_SHARE=true
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+          cpus: '4.0'
+        reservations:
+          memory: 6G
+          cpus: '2.0'
+    # Enable GPU support for production
+    runtime: nvidia
+    
+  # Production uses all models
+  model-downloader:
+    command: python scripts/download_models.py --all
