@@ -26,9 +26,17 @@ warnings.filterwarnings("ignore")
 class ModelDownloader:
     """Downloads and manages speech-to-text models for Spaces deployment."""
     
-    def __init__(self, cache_dir: str = "/tmp/models", use_auth_token: Optional[str] = None):
+    def __init__(self, cache_dir: str = "/app/models", use_auth_token: Optional[str] = None):
         self.cache_dir = Path(cache_dir)
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            self.cache_dir.mkdir(parents=True, exist_ok=True)
+            # Set permissions
+            os.chmod(str(self.cache_dir), 0o777)
+        except PermissionError:
+            # Fallback to a different directory if needed
+            self.cache_dir = Path.home() / ".cache" / "models"
+            self.cache_dir.mkdir(parents=True, exist_ok=True)
+            self.logger.warning(f"Using fallback cache directory: {self.cache_dir}")
         
         # Configure logging
         logging.basicConfig(

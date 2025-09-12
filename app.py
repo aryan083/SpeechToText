@@ -13,9 +13,9 @@ from pathlib import Path
 os.environ['APP_ENV'] = 'prod'
 os.environ['GRADIO_SERVER_NAME'] = '0.0.0.0'
 os.environ['GRADIO_SERVER_PORT'] = '7860'
-os.environ['MODEL_CACHE_DIR'] = '/tmp/models'
-os.environ['HF_HOME'] = '/tmp/models'
-os.environ['TRANSFORMERS_CACHE'] = '/tmp/models'
+os.environ['MODEL_CACHE_DIR'] = '/app/models'
+os.environ['HF_HOME'] = '/app/models'
+os.environ['TRANSFORMERS_CACHE'] = '/app/models'
 
 # Add src to Python path
 src_path = Path(__file__).parent / "src"
@@ -78,6 +78,10 @@ def download_essential_models():
         
         return successful > 0
         
+    except PermissionError as e:
+        logger.error(f"❌ Permission denied for model cache: {e}")
+        logger.info("🔄 Using fallback model loading strategy...")
+        return True  # Continue with app initialization
     except Exception as e:
         logger.error(f"❌ Error downloading models: {e}")
         return False

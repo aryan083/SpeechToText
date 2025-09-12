@@ -31,17 +31,17 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create necessary directories with proper permissions
-RUN mkdir -p /tmp/models /tmp/logs /tmp/temp && \
-    chmod 777 /tmp/models /tmp/logs /tmp/temp
+RUN mkdir -p /app/models /tmp/logs /tmp/temp && \
+    chmod 777 /app/models /tmp/logs /tmp/temp
 
 # Set environment variables for Spaces
 ENV APP_ENV=prod \
     GRADIO_SERVER_NAME=0.0.0.0 \
     GRADIO_SERVER_PORT=7860 \
-    MODEL_CACHE_DIR=/tmp/models \
-    HF_HOME=/tmp/models \
-    TRANSFORMERS_CACHE=/tmp/models \
-    TORCH_HOME=/tmp/models
+    MODEL_CACHE_DIR=/app/models \
+    HF_HOME=/app/models \
+    TRANSFORMERS_CACHE=/app/models \
+    TORCH_HOME=/app/models
 
 # Expose port for Spaces
 EXPOSE 7860
