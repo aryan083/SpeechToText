@@ -142,7 +142,6 @@ def main():
             share=False,  # Spaces handles sharing
             show_error=True,
             quiet=False,
-            enable_queue=True,  # Enable queue for better performance
             max_threads=10,     # Limit concurrent threads
         )
         

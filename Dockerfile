@@ -32,7 +32,7 @@ COPY . .
 
 # Create necessary directories with proper permissions
 RUN mkdir -p /tmp/models /tmp/logs /tmp/temp && \
-    chmod 755 /tmp/models /tmp/logs /tmp/temp
+    chmod 777 /tmp/models /tmp/logs /tmp/temp
 
 # Set environment variables for Spaces
 ENV APP_ENV=prod \

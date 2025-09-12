@@ -106,6 +106,10 @@ class ModelDownloader:
     def _download_whisper_model(self, model_id: str, force_download: bool) -> bool:
         """Download Whisper-based models."""
         try:
+            # Ensure cache directory exists and has proper permissions
+            self.cache_dir.mkdir(parents=True, exist_ok=True)
+            os.chmod(str(self.cache_dir), 0o777)
+            
             # Download using pipeline (automatically handles model and processor)
             pipe = pipeline(
                 "automatic-speech-recognition",
