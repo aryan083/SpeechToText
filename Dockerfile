@@ -30,9 +30,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create necessary directories with proper permissions
+# Create necessary directories with proper permissions (recursive)
 RUN mkdir -p /app/models /tmp/logs /tmp/temp && \
-    chmod 777 /app/models /tmp/logs /tmp/temp
+    chmod -R 777 /app/models /tmp/logs /tmp/temp
 
 # Set environment variables for Spaces
 ENV APP_ENV=prod \
@@ -41,7 +41,8 @@ ENV APP_ENV=prod \
     MODEL_CACHE_DIR=/app/models \
     HF_HOME=/app/models \
     TRANSFORMERS_CACHE=/app/models \
-    TORCH_HOME=/app/models
+    TORCH_HOME=/app/models \
+    XDG_CACHE_HOME=/app/models
 
 # Expose port for Spaces
 EXPOSE 7860

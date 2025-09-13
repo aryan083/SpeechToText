@@ -21,6 +21,8 @@ os.environ['GRADIO_SERVER_PORT'] = '7860'
 os.environ['MODEL_CACHE_DIR'] = '/app/models'
 os.environ['HF_HOME'] = '/app/models'
 os.environ['TRANSFORMERS_CACHE'] = '/app/models'
+os.environ['TORCH_HOME'] = '/app/models'
+os.environ['XDG_CACHE_HOME'] = '/app/models'
 os.environ['HF_TOKEN'] = os.getenv('HF_TOKEN') or os.getenv('HUGGINGFACE_HUB_TOKEN') or ""
 
 # Add src to Python path
