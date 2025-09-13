@@ -3,11 +3,16 @@
 Hugging Face Spaces optimized version of the Indian Speech-to-Text application.
 This version is specifically configured for deployment on Hugging Face Spaces.
 """
-
 import os
 import sys
 import logging
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Explicitly load .env from ./config/env/.env
+env_path = Path(__file__).parent / "config" / "env" / ".env"
+load_dotenv(dotenv_path=env_path, override=True)
+
 
 # Set up environment for Spaces
 os.environ['APP_ENV'] = 'prod'
@@ -16,6 +21,7 @@ os.environ['GRADIO_SERVER_PORT'] = '7860'
 os.environ['MODEL_CACHE_DIR'] = '/app/models'
 os.environ['HF_HOME'] = '/app/models'
 os.environ['TRANSFORMERS_CACHE'] = '/app/models'
+os.environ['HF_TOKEN'] = os.getenv('HF_TOKEN') or os.getenv('HUGGINGFACE_HUB_TOKEN') or ""
 
 # Add src to Python path
 src_path = Path(__file__).parent / "src"
